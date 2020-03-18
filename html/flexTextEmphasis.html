@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .row {
+      width:400px;
+      display: flex;
+      align-items: center;
+      margin: 30px 0;
+      padding: 10px;
+    }
+    .main {
+      flex:1;
+    }
+    .long-text-truncated {
+      overflow:hidden;
+	    white-space:nowrap;
+	    text-overflow: ellipsis;
+    }
+    .exta {
+      flex-basis: 100px;
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="main long-text-truncated">
+        波音747大客机车轮产线3车间2019年12月设备维修清单（未完成）
+    </div>
+    
+    <div class="extra">
+      menu
+    </div>
+  </div> 
+</body>
+</html>
