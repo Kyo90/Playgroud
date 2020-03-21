@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jsonp 向非同源服务器端请求数据</title>
+</head>
+<body>
+ <h1>Jsonp 向非同源服务器端请求数据</h1> 
+ <button id="sendJsonp">点我发送请求</button>
+
+ <script>
+   const btn = document.getElementById('sendJsonp');
+   btn.onclick = function() {
+      jsonp({
+        url:"http://localhost:3001/better",
+        data:{
+          name:'lisi',
+          age:30
+        }, 
+        success: (data) => {
+          console.log('success', data)
+        }
+      })
+   }
+
+   function jsonp(options) {
+    var script = document.createElement('script');
+    let params = '';
+    for(let attr in options.data) {
+      params += '&' + attr +'=' + options.data[attr]; 
+    }
+    const fnName = 'myJsonp' +Math.random().toString().replace('.','');
+    window[fnName] = options.success
+    script.src =`${options.url}?callback=${fnName}${params}`;
+    document.body.appendChild(script);
+    script.onload = function() {
+      document.body.removeChild(script)
+    } 
+   }
+ </script>
+</body>
+</html>
