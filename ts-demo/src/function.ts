@@ -18,11 +18,14 @@ const sum4: (x: number, y: number) => number = function(x: number, y: number): n
   return x + y;
 }
 
+
 function buildName(firstName: string, ...restOfName: string[]) {
   return firstName + " " + restOfName.join(" ");
 }
 
+
 let buildNameFun: (fname: string, ...rest: string[]) => string = buildName;
+
 
 let employeeName = buildNameFun("Joseph", "Samuel", "Lucas", "MacKinzie");
 

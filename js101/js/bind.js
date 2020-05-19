@@ -35,3 +35,17 @@ Function.prototype.myBind1 = function (context,...args1) {
 
 let printMyName2 = printName.myBind(name,'PuDong', 'Shanghai')
 printMyName2('China')
+
+function Animal(name, color) {
+  this.name = name;
+  this.color = color;
+}
+
+Animal.prototype.say = function() {
+  return `I'm a ${this.color} ${this.name}`;
+}
+
+const Cat = Animal.myBind1(null, 'cat');
+const cat = new Cat('white');
+
+console.log(cat.say());

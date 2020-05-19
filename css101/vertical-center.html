@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>垂直居中</title>
+  <style>
+    html,body {
+      margin: 0;
+    }
+    .parent {
+      height: 300px;
+      width:600px;
+      padding: 0 1em;
+      margin: 1em auto;
+      border: 1px solid red;
+    }
+    .child {
+      font-size: 1.2rem;
+      position: relative;
+      top: 50%;
+      transform: perspective(1px) translateY(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div class="child">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolore
+      nihil quas beatae unde, sunt, quaerat eos quasi alias saepe deleniti
+      nobis neque cum! Exercitationem qui modi blanditiis consequatur quaerat!
+    </div>
+  </div>
+  <div class="parent">
+    <div class="child">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae esse et nihil ipsum velit aliquid nobis rerum
+      corrupti ipsam odio aut, commodi, minima sapiente officia perspiciatis labore.
+    </div>
+  </div>
+</body>
+
+</html>

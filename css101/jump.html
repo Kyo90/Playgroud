@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弹跳的小球</title>
+  <style>
+    .loader {
+      margin: 300px auto;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(to bottom, #cb60b3 0%, #c146a1 50%, #a80077 51%, #db36a4 100%);
+      animation: jump 1.5s ease-out infinite alternate;
+    }
+
+    @keyframes jump {
+      from {
+        transform: translateY(0px)  scale(1,1);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-50px)  scale(0.8,0.8);
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader"></div>
+</body>
+
+</html>
