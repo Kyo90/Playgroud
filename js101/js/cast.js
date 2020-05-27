@@ -24,3 +24,11 @@ console.log(user);
 console.log(+user);
 console.log(user+500);
 console.log(Object.prototype.toString.call(user));
+
+
+console.log([] == 0)  // true
+// [] 数组转换成基本类型的过程，先调用valueOf() 方法，但数组的valueOf()方法返回的是其本身非简单类型
+// [].valueOf() = []
+// [].toString() = ""
+// Number("") = 0
+

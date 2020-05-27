@@ -37,7 +37,27 @@ var longestCommonPrefix1 = function(strs) {
 };
 
 
+function longestCommonPrefix2(strs) {
+  if(!Array.isArray(strs)) {
+    return strs
+  }
+  let ans = strs[0];
+  for(let i = 0; i < strs.length; i++) {
+    let item = strs[i];
+    let j;
+  
+    for(j = 0; j < ans.length; j++) {
+      if(ans[j] !== item[j]) {
+        break
+      }
+    }
+    ans = ans.slice(0, j)
+  }
+  console.log(ans)
+  return ans
+}
 
-const strs = ['flowers', 'flow', 'flight'];
-const res = longestCommonPrefix1(strs);
+
+const strs = ['lowers', 'flow', 'flowight'];
+const res = longestCommonPrefix2(strs);
 console.log(res)

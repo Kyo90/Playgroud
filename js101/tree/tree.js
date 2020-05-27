@@ -47,29 +47,42 @@ function find(data) {
   }
 }
 
-function removeNode(node, data) {
-  if (node === null) {
+function deleteNode(root, key) {
+  const deleteMinNode = (root) => {
+    if(!root.left) {
+     let pRight = root.right;
+     root.right = null;
+     return pRight;
+    }
+    root.left = deleteMinNode(root.left);
+    return root;
+  }
+  if (root === null) {
     return null;
   }
-  if (data === node.val) {
-    if (node.left === null && node.right === null) {
-      return null;
-    }
-    if (node.left === null) {
-      return node.right;
-    }
-    if (node.right === null) {
-      return node.left;
-    }
-  } else if (data < node.val) {
-    node.left = removeNode(node.left, data);
-    return node;
-  } else {
-    node.right = removeNode(node.right, data);
-    return node;
+  if (key < root.val) {
+    root.left = deleteNode(root.left, key);
+    return root;
+  } 
+  if(key > root.val){
+    root.right = deleteNode(root.right, key);
+    return root;
   }
-}
-
+  // 到这里意味已经查找到目标
+  if (root.left === null) {
+    return root.right;
+  }
+  if (root.right === null) {
+    return root.left;
+  }
+  let minNode = root.right;
+  while(minNode.left) {
+    minNode = minNode.left
+  }
+  root.val = minNode.val;
+  root.right = deleteMinNode(root.right)
+  return root;
+};
 class BST {
   constructor() {
     this.root = null; //初始化,root为null
@@ -178,6 +191,57 @@ class BST {
   }
 }
 
+
+function preOrder(node) {
+  let nodes = [];
+  const pushNode = (node) => {
+    if(node) {
+      nodes.push(node.val);
+      pushNode(node.left);
+      pushNode(node.right);
+    }
+  }
+  pushNode(node)
+  console.log(nodes);
+  return nodes;
+}
+
+function inOrder(node) {
+  let nodes = [];
+  const pushNode = node => {
+    if(node) {
+      if(node.left) {
+        pushNode(node.left)
+      }
+      nodes.push(node.val);
+      if(node.right) {
+        pushNode(node.right)
+      }
+    }
+  } 
+  pushNode(node)
+  console.log(nodes);
+  return nodes;
+}
+
+function postOrder(node) {
+  const nodes = [];
+  const pushNode = (node) => {
+    if(node) {
+      if(node.left) {
+        pushNode(node.left);
+      }
+      if(node.right) {
+        pushNode(node.right)
+      }
+      nodes.push(node.val)
+    }
+  }
+  pushNode(node);
+  console.log(nodes);
+  return nodes;
+}
+
 function preOrderUnRec1(node) {
   let nodes = [];
   if (node) {
@@ -193,7 +257,7 @@ function preOrderUnRec1(node) {
   }
 }
 
-function  inOrderUnRec(node) {
+function inOrderUnRec(node) {
   const stack = [];
   const nodes = [];
   while (stack.length || node) {
@@ -248,6 +312,44 @@ function breadthTraversal(node) {
   console.log(nodes);
 }
 
+function breadthTraversal1(node) {
+  // 在每一层遍历开始前，先记录队列中的结点数量 nn（也就是这一层的结点数量），然后一口气处理完这一层的 nn 个结点。
+  const ans = [];
+  if (node) {
+    //判断二叉树是否为空
+    var que = [node]; //将二叉树放入队列
+    while (que.length !== 0) {
+      //判断队列是否为空
+      let nodes = [];
+      let n = que.length;
+      for(let i = 0; i < n; i++) {
+        node = que.shift(); //从队列中取出一个结点
+        nodes.push(node.val); //将取出结点的值保存到数组
+        if (node.left) {
+          que.push(node.left); //如果存在左子树，将左子树放入队列
+        }
+        if (node.right) que.push(node.right); //如果存在右子树，将右子树放入队列
+      }
+      ans.push(nodes)
+    }
+  }
+  console.log(ans);
+}
+
+
+var searchBST = function(root, val) {
+  while(root !== null) {
+    if(root.val === val) {
+      return root
+    } else if(root.val < val) {
+      root = root.right
+    } else {
+      root = root.left
+    }
+  }
+  return null
+};
+
 var bst = new BST();
 bst.insert(56);
 bst.insert(22);
@@ -257,5 +359,10 @@ bst.insert(30);
 bst.insert(77);
 bst.insert(92);
 
-//preOrderUnRec(bst.root);
-breadthTraversal(bst.root)
+// preOrderUnRec(bst.root);
+// breadthTraversal(bst.root);
+// preOrder(bst.root);
+// inOrder(bst.root);
+// postOrder(bst.root);
+// breadthTraversal1(bst.root)
+searchBST(bst.root, 92)
